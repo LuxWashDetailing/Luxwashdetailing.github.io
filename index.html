@@ -5,165 +5,345 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LuxWash Detailing | Premium Auto Detailing</title>
     <style>
-        /* Global Styles */
+        /* Modern Color Scheme */
         :root {
-            --primary: #2a52be;
-            --secondary: #f8f9fa;
-            --accent: #ff6b00;
+            --primary: #0a2540;    /* Deep navy */
+            --secondary: #00d4ff;  /* Electric blue */
+            --accent: #ff6b6b;     /* Coral */
+            --light: #f8f9fa;
+            --dark: #212529;
         }
+        
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
         body {
-            line-height: 1.6;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
         
-        /* Header */
-        header {
-            background: linear-gradient(rgba(0,0,0,0.7), url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Glowing Animation */
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+        }
+        
+        /* Header/Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a6a 100%);
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
         .logo {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: bold;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            background: linear-gradient(to right, var(--secondary), white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            font-weight: 300;
         }
         .cta-button {
             display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 5px;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 15px 35px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
         }
         .cta-button:hover {
-            background: #e05d00;
             transform: translateY(-3px);
+            animation: glow 1.5s infinite;
+            color: white;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cta-button:hover::before {
+            opacity: 1;
         }
         
-        /* Services */
+        /* Services Section */
         .services {
-            padding: 60px 20px;
+            padding: 100px 20px;
             text-align: center;
+            background: white;
         }
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
             color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
         }
         .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .service-card {
             background: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
         }
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--secondary);
+            transition: height 0.3s ease;
+        }
+        .service-card:hover::before {
+            height: 100%;
         }
         .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
         }
         .service-title {
             font-size: 1.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        .service-description {
+            color: #666;
+            font-size: 1rem;
         }
         
-        /* Gallery */
+        /* Gallery Section */
         .gallery {
-            padding: 60px 20px;
-            background: var(--secondary);
+            padding: 100px 20px;
+            background: var(--light);
+            text-align: center;
         }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 40px auto;
         }
         .gallery-item {
-            height: 200px;
-            background: #ddd;
-            border-radius: 8px;
+            height: 250px;
+            border-radius: 12px;
             overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
-        /* Replace with actual images */
-        .gallery-item {
-            background: linear-gradient(45deg, #ccc, #eee);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover::before {
+            opacity: 0.3;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
         }
         
-        /* Contact */
+        /* Contact Section */
         .contact {
-            padding: 60px 20px;
+            padding: 100px 20px;
             text-align: center;
+            background: white;
         }
         .contact-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 40px auto;
         }
         .contact-card {
-            padding: 30px;
-            border-radius: 8px;
+            padding: 40px 30px;
+            border-radius: 12px;
             background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        .contact-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        .contact-info {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
         
         /* Footer */
         footer {
-            background: #333;
+            background: var(--primary);
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 50px 20px;
+        }
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--secondary), white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .social-link:hover {
+            color: var(--secondary);
+        }
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 30px;
         }
         
-        /* Mobile Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 2rem;
-            }
-            .service-grid, .contact-methods {
-                grid-template-columns: 1fr;
-            }
+            .logo { font-size: 2.2rem; }
+            .tagline { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .service-grid, .contact-methods { grid-template-columns: 1fr; }
+            .hero { padding: 80px 20px; }
+            .services, .gallery, .contact { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header/Hero Section -->
-    <header>
-        <div class="logo">LuxWash Detailing</div>
-        <div class="tagline">Premium Auto Detailing in [Your City]</div>
-        <a href="#contact" class="cta-button">Book Your Detail Today</a>
-    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="logo">LuxWash</h1>
+        <p class="tagline">Where automotive elegance meets unparalleled shine. Premium detailing for discerning owners.</p>
+        <a href="#contact" class="cta-button">Schedule Your Detail</a>
+    </section>
     
     <!-- Services Section -->
     <section class="services">
@@ -171,56 +351,73 @@
         <div class="service-grid">
             <div class="service-card">
                 <div class="service-icon">✨</div>
-                <h3 class="service-title">Exterior Detailing</h3>
-                <p>Hand wash, clay bar, wax/sealant, ceramic coating, paint correction, headlight restoration, and wheel cleaning.</p>
+                <h3 class="service-title">Signature Exterior</h3>
+                <p class="service-description">Ceramic coatings, paint correction, and premium protection that lasts for years with our advanced nanotechnology.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🧽</div>
-                <h3 class="service-title">Interior Detailing</h3>
-                <p>Deep vacuum, shampoo seats, pet hair removal, odor elimination, leather conditioning, and dashboard detailing.</p>
+                <h3 class="service-title">Luxury Interior</h3>
+                <p class="service-description">From leather rejuvenation to complete odor eradication, we restore your cabin to showroom perfection.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🚙</div>
-                <h3 class="service-title">Mobile Service</h3>
-                <p>We come to your home or office! Same professional results at your convenience.</p>
+                <h3 class="service-title">Concierge Detailing</h3>
+                <p class="service-description">Our mobile team brings the premium experience to your home or office with full equipment setup.</p>
             </div>
         </div>
     </section>
     
     <!-- Gallery Section -->
     <section class="gallery">
-        <h2 class="section-title">Our Work</h2>
+        <h2 class="section-title">Masterful Transformations</h2>
         <div class="gallery-grid">
-            <div class="gallery-item">Before/After 1</div>
-            <div class="gallery-item">Before/After 2</div>
-            <div class="gallery-item">Before/After 3</div>
-            <div class="gallery-item">Before/After 4</div>
+            <div class="gallery-item">
+                <div class="placeholder-text">Paint Correction</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder-text">Interior Detailing</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder-text">Ceramic Coating</div>
+            </div>
+            <div class="gallery-item">
+                <div class="placeholder-text">Leather Restoration</div>
+            </div>
         </div>
     </section>
     
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <h2 class="section-title">Contact Us</h2>
+        <h2 class="section-title">Experience LuxWash</h2>
         <div class="contact-methods">
             <div class="contact-card">
-                <h3>Call or Text</h3>
-                <p><a href="tel:+15551234567">(555) 123-4567</a></p>
+                <div class="contact-icon">📞</div>
+                <h3 class="contact-title">By Phone</h3>
+                <p class="contact-info"><a href="tel:+15551234567">(555) LUX-WASH</a></p>
             </div>
             <div class="contact-card">
-                <h3>Email</h3>
-                <p><a href="mailto:info@luxwash.com">info@luxwash.com</a></p>
+                <div class="contact-icon">✉️</div>
+                <h3 class="contact-title">Via Email</h3>
+                <p class="contact-info"><a href="mailto:service@luxwash.com">service@luxwash.com</a></p>
             </div>
             <div class="contact-card">
-                <h3>Service Area</h3>
-                <p>[Your City, State] and surrounding areas</p>
+                <div class="contact-icon">💬</div>
+                <h3 class="contact-title">On Social</h3>
+                <p class="contact-info">@LuxWashDetailing</p>
             </div>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 LuxWash Detailing. All rights reserved.</p>
-        <p>Professional auto detailing services in [Your City].</p>
+        <div class="footer-logo">LuxWash</div>
+        <p>Redefining automotive care through precision and passion</p>
+        <div class="social-links">
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">💻</a>
+        </div>
+        <p class="copyright">© 2023 LuxWash Detailing. All rights reserved.</p>
     </footer>
 </body>
 </html>
